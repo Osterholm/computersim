@@ -1,0 +1,50 @@
+<div class="container">
+	<h1>Code input</h1>
+	<form (ngSubmit)="onCompile()" #codeInputForm="ngForm">
+		<div class="form-group">
+			<textarea rows="6" class="form-control" required
+				[(ngModel)]="model.code"
+				ngControl="code" #code="ngForm" ></textarea>
+			<div [hidden]="code.valid || code.pristine" class="alert alert-danger">Code is required</div>
+			</div>
+		<button type="submit" class="btn btn-default" [disabled]="!codeInputForm.form.valid">Compile</button>
+	</form>
+	
+	<hr>
+	
+	<h1>Compiler</h1>
+	<form (ngSubmit)="onBoot()" #compilerForm="ngForm">
+		<div class="form-group">
+			<textarea rows="8" class="form-control" required
+				[(ngModel)]="model.compiledCode"
+				ngControl="compiledCode" #compiledCode="ngForm" ></textarea>
+			<div [hidden]="compiledCode.valid || compiledCode.pristine" class="alert alert-danger">Compiled code is required</div>
+			</div>
+		<button type="submit" class="btn btn-default" [disabled]="!codeInputForm.form.valid">Boot computer</button>
+	</form>
+	
+	<hr>
+	
+	<h1>Computer</h1>
+	<form (ngSubmit)="onStep()" #computerForm="ngForm">
+		<table>
+			<tr><td>
+			<h2>Memory</h2>
+			</td><td>
+			<h2>Output</h2>
+			</td>
+			<tr><td>
+			<textarea style="width:300px; height:500px;" class="form-control"
+				[(ngModel)]="model.memory"
+				ngControl="memory" #memory="ngForm" ></textarea>
+			</td><td>
+			<textarea style="width:500px; height:500px;" class="form-control"
+				[(ngModel)]="model.output"
+				ngControl="output" #output="ngForm" ></textarea>
+			</td></tr><tr>
+			
+			<button type="submit" class="btn btn-default" [disabled]="!compilerForm.form.valid">Step</button>
+			</tr>
+		</table>
+	</form>
+</div>
