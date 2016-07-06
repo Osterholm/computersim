@@ -1,27 +1,35 @@
 import { ComputerState } from './computer-state';
 
+/**
+ * Models a computer.
+ * The main responsibility for this class is to handle
+ * computer interface, execution flow and instruction
+ * interpretation.
+ */
 export class Computer {
 
-//	constructor(
-//		public state: ComputerState,
-//		public outputString: string
-//	) {}
-//	state: ComputerState = new ComputerState(this.stackDepth);
 	state: ComputerState;
 	outputString: String;
-	
+
 	constructor(stackDepth : number) {
 		console.log("Creating computer (" + stackDepth + ")");
 		this.outputString = '';
 		this.state = new ComputerState(stackDepth);
 	}
-	
+
+	/** Sets PC to target address.
+	 * Returns this object to allow chaining.
+	 */
 	setAddress(address) {
 		console.log("Setting address to " + address);
 		this.state.setPc(address);
 		return this;
 	}
-	
+
+	/** Inserts an instruction into the memory at current PC.
+	 * PC is incremented after insert.
+	 * Returns this object to allow chaining.
+	 */
 	insert(str, nr) {
 		var retval = null;
 		if(nr) {
@@ -37,12 +45,9 @@ export class Computer {
 		}
 		return this;
 	}
-	
-//	insert(str) {
-//		state.insert(str);
-//		return this;
-//	}
-  
+
+	/** Execute one instruction. */
+	// TODO: Restructure. We want to be able to run these commands in more configurations.
 	clock() {
 		console.log("Clocking");
 		var data = this.state.nextInstruction();
@@ -86,21 +91,26 @@ export class Computer {
 			this.state.pushStack(arg);
 		}
 	}
-  
+
+	/** Append str to the output. */
 	output(str) {
 		this.outputString += str + "\n";
 	}
-  
+
+	/** Get data to be displayed on a monitor as String. */
 	getOutput() {
 		return this.outputString;
 	}
 	
+	/** Returns a memory dump as String. */
 	getMemoryDump() {
 		return this.state.getMemoryDump();
 	}
-	
+
+	/** Run computer until program finishes or computer crashes. */
 	execute() {
-			console.log("Executing");
-		
+		// TODO: Implement so that this will run
+		// until program finishes.
+		console.log("Executing");
 	}
 }

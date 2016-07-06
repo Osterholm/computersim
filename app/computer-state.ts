@@ -1,3 +1,11 @@
+
+/**
+ * Holds program counter, stack pointer and memory.
+ *
+ * The stack resides in the program memory, starts
+ * at highest address and grows towards smaller
+ * addresses.
+ */
 export class ComputerState {
 
 	pc: number;
@@ -46,15 +54,14 @@ export class ComputerState {
 		return data;
 	}
 	
+	/** Return from subroutine .*/
 	ret() {
 		var data = this.popStack();
 		this.pc = Number(data);
 	}
 	
+	/** Creates a memory dump and returns it as a String. */
 	getMemoryDump() {
-		console.log('Creating memory dump (' + this.stackDepth + ')');
-		console.log('PC (' + this.pc + ')');
-		console.log('SP (' + this.sp + ')');
 		var out = "";
 		for(let i=0; i<this.stackDepth; i++) {
 			out += i + ": " + this.memory[i];

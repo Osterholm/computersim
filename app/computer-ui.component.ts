@@ -37,10 +37,12 @@ end
 main()`,
 		'', '');
 
+	// TODO: Add compilation
 	onCompile() {
 		console.log("compiling!");
 	}
 	
+	// TODO: Add actual loading from compiled code.
 	onBoot() {
 		console.log("booting!");
 		
@@ -59,6 +61,7 @@ main()`,
 		this.model.memory = this.computer.getMemoryDump();
 	}
 	
+	// TODO: Add button for running all at once.
 	onStep() {
 		console.log("stepping!");
 		if(!this.computer) {
